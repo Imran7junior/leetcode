@@ -7,6 +7,7 @@
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        fasf
         
 # @lc code=end
 
