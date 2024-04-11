@@ -15,4 +15,3 @@ class Solution:
                 total += min(tickets[i], tickets[k] - 1)
         return total
 # @lc code=end
-
