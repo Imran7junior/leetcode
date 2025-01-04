@@ -1,7 +1,7 @@
 
 class Solution:
     def countPalindromicSubsequence(self, s: str) -> int:
-        R = [0] * 26
+        R = [0] * 26 
         for u in s:
             R[ord(u) - ord('a')] += 1
         
