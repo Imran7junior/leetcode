@@ -8,4 +8,4 @@ class Solution:
             cnt+=(2*acc>=Sum)
         return cnt
         
-        
+         
