@@ -1,0 +1,20 @@
+class Solution:
+    def numOfSubarrays(self, arr):
+        MOD = 1000000007
+        prefix_count = {0: 1}  # Prefix sum of 0 is even
+        prefix_sum = 0
+        result = 0
+
+        for num in arr:
+            prefix_sum += num
+            if prefix_sum % 2 == 1:
+                # If prefix_sum is odd, count the number of even prefix sums
+                result = (result + prefix_count.get(0, 0)) % MOD
+            else:
+                # If prefix_sum is even, count the number of odd prefix sums
+                result = (result + prefix_count.get(1, 0)) % MOD
+            
+            # Update the frequency of the current prefix_sum (odd or even)
+            prefix_count[prefix_sum % 2] = prefix_count.get(prefix_sum % 2, 0) + 1
+
+        return result
