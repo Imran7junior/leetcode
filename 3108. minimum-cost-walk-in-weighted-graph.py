@@ -28,4 +28,4 @@ class Solution:
             else:
                 result.append(min_path_cost[find_root(start)])
                 
-        return result
+        return result   
