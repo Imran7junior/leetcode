@@ -1,16 +1,11 @@
+from bisect import bisect_left, bisect_right
+
 class Solution:
-    def countPairs(self, nums: List[int], k: int) -> int:
-        # Map to track all indices for each number
-        pos = defaultdict(list)
-        count = 0
-        
-        # Step 1: Group Genins (numbers) by village (same value)
-        for i, val in enumerate(nums):
-            # Step 2: Check only within the same group (same number)
-            for j in pos[val]:
-                if (i * j) % k == 0:
-                    count += 1
-            # Step 3: Add current index to the list of indices for the number
-            pos[val].append(i)
-        
-        return count
+    def countFairPairs(self, v, lower, upper):
+        v.sort()
+        ans = 0
+        for i in range(len(v) - 1):
+            low = bisect_left(v, lower - v[i], i + 1)
+            up = bisect_right(v, upper - v[i], i + 1)
+            ans += up - low
+        return ans
