@@ -9,6 +9,6 @@ class Solution:
 		return ans
 	
 sol = Solution()
-nums = [1, 2, 1, 4, 1]  # <-- you can change this list
+nums = [1, 2, 1, 4, 1] 
 result = sol.countSubarrays(nums)
 print("Result:", result)
