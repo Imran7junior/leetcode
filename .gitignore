@@ -1,1 +1,3 @@
 debug.log
+out/
+*.class
