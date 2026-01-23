@@ -1,13 +1,13 @@
 import java.util.*;
 
 class Solution {
-    public int minimumPairRemoval(List<Integer> nums) {
-        int n = nums.size();
+    public int minimumPairRemoval(int[] nums) {
+        int n = nums.length;
         
         // Check if already sorted
         boolean sorted = true;
         for (int i = 0; i < n - 1; i++) {
-            if (nums.get(i) > nums.get(i + 1)) {
+            if (nums[i] > nums[i + 1]) {
                 sorted = false;
                 break;
             }
@@ -17,7 +17,7 @@ class Solution {
         // Create mutable array
         int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
-            arr[i] = nums.get(i);
+            arr[i] = nums[i];
         }
         
         boolean[] rmv = new boolean[n];
@@ -87,13 +87,13 @@ class Solution {
         Solution solution = new Solution();
         
         // Test case 1
-        List<Integer> nums1 = Arrays.asList(5, 2, 3, 1);
+        int[] nums1 = {5, 2, 3, 1};
         int output1 = solution.minimumPairRemoval(nums1);
         System.out.println("Test 1: nums = [5,2,3,1]");
         System.out.println("Output: " + output1 + ", Expected: 2");
         
         // Test case 2
-        List<Integer> nums2 = Arrays.asList(1, 2, 2);
+        int[] nums2 = {1, 2, 2};
         int output2 = solution.minimumPairRemoval(nums2);
         System.out.println("Test 2: nums = [1,2,2]");
         System.out.println("Output: " + output2 + ", Expected: 0");
