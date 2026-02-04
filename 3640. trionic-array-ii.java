@@ -1,51 +1,78 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    public int maxSumTrionic(int[] A) {
-        int n = A.length;
-        long neg = -(1L << 50);
-        long ans = neg;
-        
-        int i = 0, l = 0, p = 0, q = 0, r = 0;
-        while (i < n - 1) {
-            // Find l set Sum=0
-            while (i < n - 1 && A[i] >= A[i + 1]) i++;
-            l = i;
-            long Sum = 0;
-            
-            // 1st uphill & find p, if p==l skip the rest
-            while (i < n - 1 && A[i] < A[i + 1]) {
-                int x = A[i];
-                Sum += (x > 0 ? x : 0);
-                i++;
-            }
-            p = i;
-            if (p == l || (p + 1 < n && A[p] == A[p + 1])) continue;
-            if (A[p - 1] < 0) Sum += A[p - 1];
-            
-            // 1st downhill & find q, if q==p skip the rest
-            while (i < n - 1 && A[i] > A[i + 1]) {
-                Sum += A[i];
-                i++;
-            }
-            q = i;
-            if (q == p || (q + 1 < n && A[q] == A[q + 1])) continue;
-            
-            // 2nd uphill & find r, if r>q update ans with Sum, back to i=q
-            Sum += A[q];
-            long inc = 0, maxInc = neg;
-            while (i < n - 1 && A[i] < A[i + 1]) {
-                inc += A[i + 1];
-                maxInc = Math.max(maxInc, inc);
-                i++;
-            }
-            r = i;
-            if (r > q) {
-                ans = Math.max(ans, Sum + maxInc);
-                i = q;
-            }
-            i += (l == i ? 1 : 0);
+    static class Triple {
+        int p, q;
+        long sum;
+        Triple(int p, int q, long sum){
+            this.p = p;
+            this.q = q;
+            this.sum = sum;
         }
-        
-        return (int) ans;
+    }
+    public List<Triple> decompose(int[] nums){
+        int n = nums.length;
+        List <Triple> subarrays = new ArrayList<>();
+
+        int l = 0;
+        long sum = nums[0];
+
+        for(int i = 1; i < n; i ++){
+            // If we fail strict decreasing at boundary i-1 -> i, end the current subarray.
+            if(nums[i - 1] <= nums[i]){
+                subarrays.add(new Triple(l, i - 1, sum));
+                l = i;
+                sum = 0;
+            }
+            sum += nums[i];
+        }
+        // last subarray
+        subarrays.add(new Triple(l, n - 1, sum));
+        return subarrays;
+    }
+
+    public long maxSumTrionic(int[] nums){
+        int n = nums.length;
+
+        long[] maxEndingAt = new long[n];
+        for(int i = 0; i < n; i ++){
+            maxEndingAt[i] = nums[i];
+            if(i > 0 && nums[i - 1] < nums[i]){
+                if(maxEndingAt[i - 1] > 0){
+                    maxEndingAt[i] += maxEndingAt[i - 1];
+                }
+            }
+        }
+
+        long[] maxStartingAt = new long[n];
+        for(int i = n - 1; i >= 0; i --){
+            maxStartingAt[i] = nums[i];
+            if(i < n - 1 && nums[i] < nums[i + 1]){
+                if(maxStartingAt[i + 1] > 0){
+                    maxStartingAt[i] += maxStartingAt[i + 1];
+                }
+            }
+        }
+
+        List <Triple> PQS = decompose(nums);
+        long ans = Long.MIN_VALUE;
+
+        for(Triple t : PQS){
+            int p = t.p;
+            int q = t.q;
+            long sum = t.sum;
+
+            if(p > 0 && nums[p - 1] < nums[p] &&
+               q < n - 1 && nums[q] < nums[q + 1] &&
+               p < q){
+                long cand = maxEndingAt[p - 1] + sum + maxStartingAt[q + 1];
+                if(cand > ans){
+                    ans = cand;
+                }
+            }
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
