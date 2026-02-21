@@ -16,3 +16,23 @@ class Solution:
             if n % i == 0:
                 return False
         return True
+
+if __name__ == "__main__":
+    sol = Solution()
+    
+    # Example 1:
+    left = 6
+    right = 10
+    output = sol.countPrimeSetBits(left, right)
+    print(f"Example 1: Input: left = {left}, right = {right}")
+    print(f"Output: {output}")
+    print(f"Expected: 4")
+    print()
+    
+    # Example 2:
+    left = 10
+    right = 15
+    output = sol.countPrimeSetBits(left, right)
+    print(f"Example 2: Input: left = {left}, right = {right}")
+    print(f"Output: {output}")
+    print(f"Expected: 5")
