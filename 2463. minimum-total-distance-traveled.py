@@ -1,3 +1,6 @@
+from typing import List
+from collections import deque
+
 class Solution:
     def minimumTotalDistance(self, robot: List[int], factory: List[List[int]]) -> int:
         # Sort positions to enable optimal matching
@@ -34,3 +37,23 @@ class Solution:
                 dp[i][j] = qq[0][1] + prefix
                 
         return dp[0][0]
+
+if __name__ == "__main__":
+    sol = Solution()
+    
+    # Example 1
+    robot1 = [0, 4, 6]
+    factory1 = [[2, 2], [6, 2]]
+    output1 = sol.minimumTotalDistance(robot1, factory1)
+    print(f"Example 1: robot={robot1}, factory={factory1}")
+    print(f"Output: {output1}")
+    print(f"Expected: 4")
+    print()
+    
+    # Example 2
+    robot2 = [1, -1]
+    factory2 = [[-2, 1], [2, 1]]
+    output2 = sol.minimumTotalDistance(robot2, factory2)
+    print(f"Example 2: robot={robot2}, factory={factory2}")
+    print(f"Output: {output2}")
+    print(f"Expected: 2")
