@@ -26,22 +26,3 @@ class Solution:
             l = r + 1
 
         return ans
-
-
-# Test cases
-if __name__ == "__main__":
-    solution = Solution()
-    
-    # Example 1
-    nums1 = [2, 1, 3]
-    result1 = solution.maxValue(nums1)
-    print(f"Example 1: Input: nums = {nums1}")
-    print(f"Output: {result1}")
-    print(f"Expected: [2, 2, 3]\n")
-    
-    # Example 2
-    nums2 = [2, 3, 1]
-    result2 = solution.maxValue(nums2)
-    print(f"Example 2: Input: nums = {nums2}")
-    print(f"Output: {result2}")
-    print(f"Expected: [3, 3, 3]")
