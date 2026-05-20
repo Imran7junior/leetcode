@@ -14,3 +14,23 @@ class Solution:
                 common += 1
             result[i] = common
         return result
+
+if __name__ == "__main__":
+    sol = Solution()
+    
+    # Example 1
+    A1 = [1,3,2,4]
+    B1 = [3,1,2,4]
+    output1 = sol.findThePrefixCommonArray(A1, B1)
+    print(f"Example 1: A={A1}, B={B1}")
+    print(f"Output: {output1}")
+    print(f"Expected: [0,2,3,4]")
+    print()
+    
+    # Example 2
+    A2 = [2,3,1]
+    B2 = [3,1,2]
+    output2 = sol.findThePrefixCommonArray(A2, B2)
+    print(f"Example 2: A={A2}, B={B2}")
+    print(f"Output: {output2}")
+    print(f"Expected: [0,1,3]")
