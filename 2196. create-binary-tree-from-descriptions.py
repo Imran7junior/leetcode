@@ -1,3 +1,12 @@
+from typing import Optional
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def createBinaryTree(self, descriptions: list[list[int]]) -> Optional[TreeNode]:
         def construct_tree(cur_node_val):
