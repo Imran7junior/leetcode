@@ -43,4 +43,5 @@ class Solution {
         System.out.println(sol.processStr("cd%#*#", 3));  // 'd'
         System.out.println(sol.processStr("z*#", 0));     // '.'
     
+	}
 }
