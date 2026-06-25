@@ -1,25 +1,30 @@
 class Solution {
-    public long countMajoritySubarrays(int[] nums, int target) {
+    public int countMajoritySubarrays(int[] nums, int target) {
         int n = nums.length;
-        long ans = 0;
+        int balance = n + 1;
 
-        for (int l = 0; l < n; l++) {
-            int targetCount = 0;
+        int[] freq = new int[2 * n + 2];
+        int[] pref = new int[2 * n + 2];
 
-            for (int r = l; r < n; r++) {
-                if (nums[r] == target) {
-                    targetCount++;
-                }
+        freq[balance] = 1;
+        pref[balance] = 1;
 
-                int len = r - l + 1;
+        int answer = 0;
 
-                if (targetCount > len / 2) {
-                    ans++;
-                }
+        for (int num : nums) {
+            if (num == target) {
+                balance++;
+            } else {
+                balance--;
             }
+            freq[balance]++;
+
+            pref[balance] = pref[balance - 1] + freq[balance];
+
+            answer += pref[balance - 1];
         }
 
-        return ans;
+        return answer;
     }
 
     public static void main(String[] args) {
